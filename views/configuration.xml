@@ -1,0 +1,41 @@
+<odoo>
+    <data>
+        <record id="config_tree" model="ir.ui.view">
+            <field name="name">Configuration</field>
+            <field name="model">config.details</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="help_data"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="config_form" model="ir.ui.view">
+            <field name="name">Configuration</field>
+            <field name="model">config.details</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <field name="help_data"/>
+
+                        <!--                        <group col="4" colspan="4">-->
+                        <!--                            <field name="help_data"/>-->
+                        <!--                        </group>-->
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="config_action" model="ir.actions.act_window">
+            <field name="name">Configuration</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">config.details</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+</odoo>

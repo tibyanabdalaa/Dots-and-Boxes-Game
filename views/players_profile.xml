@@ -1,0 +1,156 @@
+<odoo>
+    <data>
+        <record id="view_player_profile_tree" model="ir.ui.view">
+            <field name="name">Player Profile</field>
+            <field name="model">player.profile</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="country_id"/>
+                    <field name="points"/>
+                    <field name="games_played"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_player_profile_graph" model="ir.ui.view">
+            <field name="name">Player Profile</field>
+            <field name="model">player.profile</field>
+            <field name="arch" type="xml">
+                <graph string="Players Profile"  type="bar" stacked="1">
+                    <field name="country_id"/>
+                    <field name="games_win" type="measure"/>
+                    <field name="games_lose" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="view_player_profile_kanban" model="ir.ui.view">
+            <field name="name">Player Profile</field>
+            <field name="model">player.profile</field>
+            <field name="arch" type="xml">
+                <kanban class="o_res_partner_kanban">
+                    <field name="id"/>
+                    <field name="name"/>
+                    <field name="email"/>
+                    <field name="points"/>
+                    <field name="phone"/>
+                    <field name="country_id"/>
+                    <field name="image"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                                <t>
+                                    <t t-set="placeholder" t-value="'/base/static/img/company_image.png'"/>
+                                    <div class="o_kanban_image_fill_left o_kanban_image_full"
+                                         t-attf-style="background-image: url(#{kanban_image('player.profile', 'image', record.id.raw_value, placeholder)})"
+                                         role="img"/>
+                                </t>
+                                <div class="oe_kanban_details">
+                                    <strong class="o_kanban_record_title oe_partner_heading">
+                                        <field name="name"/>
+                                    </strong>
+                                    <div class="o_kanban_tags_section oe_kanban_partner_categories"/>
+                                    <ul>
+                                        <li>
+                                            <field name="country_id"/>
+                                        </li>
+                                        <li class="o_text_overflow">
+                                            <field name="email"/>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="view_player_profile_search" model="ir.ui.view">
+            <field name="name">player.profile.search</field>
+            <field name="model">player.profile</field>
+            <field name="arch" type="xml">
+                <search>
+                    <filter string="Country" name="country_id"/>
+                    <group expand="1" string="Group By">
+                        <filter string="Country" name="country_id" domain="[]" context="{'group_by': 'country_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+        <record id="view_player_profile_form" model="ir.ui.view">
+            <field name="name">Player Profile</field>
+            <field name="model">player.profile</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="match_details_view"
+                                    type="object"
+                                    class="oe_stat_button"
+                                    icon="fa-list-ol"
+                                    help="Matches">
+                                <field string="Matches" name="matches_count" widget="statinfo"/>
+                            </button>
+                            <button name="action_view_last_game"
+                                    string="Last Game"
+                                    type="object"
+                                    class="oe_stat_button"
+                                    icon="fa-list-ol"
+                                    help="Last Game"/>
+
+                        </div>
+
+                        <field name="image" widget="image" class="oe_avatar"
+                               options="{&quot;preview_image&quot;: &quot;image&quot;}"/>
+
+                        <h1>
+                            <field name="name" default_focus="1" placeholder="Name"/>
+                        </h1>
+                        <group string="Information" col="4" colspan="4">
+                            <field name="country_id"/>
+                            <field name="phone"/>
+                            <field name="email"/>
+                        </group>
+                        <group string="Player Status" col="4" colspan="4">
+                            <field name="points"/>
+                            <field name="win_percentage"/>
+                        </group>
+                        <group col="4" colspan="4">
+                            <field name="time_played" widget="float_time"/>
+                            <field name="average_match_time" widget="float_time"/>
+                            <field name="min_victory_time" widget="float_time"/>
+                        </group>
+                        <group col="4" colspan="4">
+                            <field name="games_played"/>
+                            <field name="games_win"/>
+                            <field name="games_lose"/>
+                            <field name="games_tie"/>
+
+                        </group>
+                        <group col="4" colspan="4">
+                            <field name="max_boxes"/>
+                            <field name="max_sequence"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="player_profile_action" model="ir.actions.act_window">
+            <field name="name">Players Profile</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">player.profile</field>
+            <field name="view_mode">kanban,tree,form,graph</field>
+        </record>
+
+
+    </data>
+</odoo>

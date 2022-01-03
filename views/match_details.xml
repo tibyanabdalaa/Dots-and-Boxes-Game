@@ -1,0 +1,78 @@
+<odoo>
+    <data>
+        <record id="view_match_details_tree" model="ir.ui.view">
+            <field name="name">Match details</field>
+            <field name="model">match.details</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="date"/>
+                    <field name="player_id"/>
+                    <field name="game_type"/>
+                    <field name="game_point"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_match_details_search" model="ir.ui.view">
+            <field name="name">Match Details</field>
+            <field name="model">match.details</field>
+            <field name="arch" type="xml">
+                <search>
+                    <filter string="Player" name="player_id"/>
+                    <group expand="1" string="Group By">
+                        <filter string="Player" name="player_id" domain="[]" context="{'group_by': 'player_id'}"/>
+                        <separator/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+        <record id="view_match_details_form" model="ir.ui.view">
+            <field name="name">Match details</field>
+            <field name="model">match.details</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <widget name="web_ribbon" title="Lose" bg_color="bg-danger"
+                                attrs="{'invisible': [('state', '!=', 'lose')]}"/>
+
+                        <widget name="web_ribbon" title="Win" bg_color="bg-success"
+                                attrs="{'invisible': [('state', '!=', 'win')]}"/>
+
+                        <widget name="web_ribbon" title="Tie" bg_color="bg-dark"
+                                attrs="{'invisible': [('state', '!=', 'tie')]}"/>
+
+                        <group col="4" colspan="4">
+                            <field name="player_id"/>
+                            <field name="country_id"/>
+                            <field name="date"/>
+                        </group>
+                        <group col="4" colspan="4">
+                            <field name="game_type" widget="ratio"/>
+                            <field name="game_point"/>
+                            <field name="time_played" widget="float_time"/>
+                            <field name="max_sequence"/>
+                            <field name="state"/>
+                        </group>
+
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="match_details_action" model="ir.actions.act_window">
+            <field name="name">Match details</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">match.details</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>

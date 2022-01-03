@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_dots_game_player_profile,dots_game_player_profile,model_player_profile,base.group_user,1,1,1,1
+access_dots_game_match_details,dots_game_match_details,model_match_details,base.group_user,1,1,1,1
+access_dots_game_config_details,dots_game_config_details,model_config_details,base.group_user,1,1,1,1

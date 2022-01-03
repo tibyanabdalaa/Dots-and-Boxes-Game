@@ -1,0 +1,22 @@
+<odoo>
+    <data>
+        <menuitem name="Dots and Boxes"
+                  id="dots_boxes_root_menu" sequence="1" web_icon="dots_game/static/description/icon.jpg"/>
+
+        <menuitem name="Players Profile"
+                  id="player_profile_menu" parent="dots_boxes_root_menu"
+                  action="player_profile_action" sequence="1"/>
+
+        <menuitem name="Match details"
+                  id="match_details_menu" parent="dots_boxes_root_menu"
+                  action="match_details_action" sequence="2"/>
+
+        <menuitem name="Configuration" parent="dots_boxes_root_menu"
+                  id="config_root_menu" sequence="2"/>
+
+        <menuitem name="Help Data"
+                  id="config_rules_menu" parent="config_root_menu"
+                  action="config_action" sequence="1"/>
+
+    </data>
+</odoo>
